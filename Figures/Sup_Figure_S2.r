@@ -140,15 +140,6 @@ ggplot(data_s1_1600_e,aes(x=scores))+
 
  
 
-
-
-
-
-
-
-
-
-
 temp_test <- read.csv("/Users/mayunlong/Desktop/outputs_final_test32_2000cells_lymphocyte_single_model.csv",header = TRUE)
 
 final_data <- temp_test
@@ -159,9 +150,6 @@ final_data <- temp_test
    
  }
 na.omit()
-
-
-
 
 
 
