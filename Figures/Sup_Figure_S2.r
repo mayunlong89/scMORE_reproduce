@@ -139,6 +139,32 @@ ggplot(data_s1_1600_e,aes(x=scores))+
   theme_classic()
 
  
+
+
+
+
+
+
+
+
+
+
+temp_test <- read.csv("/Users/mayunlong/Desktop/outputs_final_test32_2000cells_lymphocyte_single_model.csv",header = TRUE)
+
+final_data <- temp_test
+ 
+ if(is.na(final_data$Tval)) {
+   
+   final_data$Tval_scale <- max_min_scale(final_data$Tval)
+   
+ }
+na.omit()
+
+
+
+
+
+
 ###--------------------------------------------------------------------------------------
 #@ 2) Calculating specificity scores
 #single_cell is the input single-cell data.
@@ -222,3 +248,70 @@ sparsity_cosr
 data_s1_1600 <-gene_cosr(pbmc_10x_real_data_downsampled_1600)
 sparsity_cosr <- length(data_s1_1600$scores[which(data_s1_1600$scores==0)])/length(data_s1_1600$scores)
 sparsity_cosr
+
+
+
+
+
+###--------------------------------------------------------------------------------------
+#@ mode 2 use expression value of each gene for the linear regression model
+gene_expr <- function(single_cell = single_cell){
+  
+  #Calculating the averarge expression value of TFs and targeting genes across all cell types
+  
+  #extracting cell type names
+  all_celltype_names <- as.vector(unique(Idents(single_cell)))
+  
+  #Calculating the averarge expression value or average peak value
+  celltype.averages <- AverageExpression(single_cell)
+  #1) celltype.averages$RNA 
+  celltype_rna <- celltype.averages[[1]]
+  
+  #2) celltype.averages$peaks
+  #celltype.averages[[2]] 
+  
+  ##-----Extracting the average expression value of each gene or TF in a given regulon
+  #Empty data.frame
+  data_s1 <- data.frame(matrix(ncol = 3, nrow = 0))
+  names(data_s1) <- c("genes","scores","celltypes")
+  for (i in 1:length(all_celltype_names)){
+    
+    data_s <- data.frame(rownames(celltype_rna),celltype_rna[,i])
+    data_s[,3] <- rep(all_celltype_names[i],length(celltype_rna[,1]))
+    names(data_s) <- c("genes","scores","celltypes")
+    
+    #collecting all the cell types
+    data_s1 <- rbind(data_s1,data_s)
+  }
+  
+  #If specificity score = -1, transforming -1 to 0
+  #data_s1[,2][which(data_s1[,2] == -1)] <- 0
+  
+  return(data_s1)
+  
+}
+
+## Calculate the sparsity
+data_s1 <-gene_expr(pbmc_10x_real_data_downsampled)
+sparsity_cosr <- length(data_s1$scores[which(data_s1$scores==0)])/length(data_s1$scores)
+sparsity_cosr
+
+
+## Calculate the sparsity
+data_s1_2000 <-gene_expr(pbmc_10x_real_data_downsampled_2000)
+sparsity_cosr <- length(data_s1_2000$scores[which(data_s1_2000$scores==0)])/length(data_s1_2000$scores)
+sparsity_cosr
+
+
+## Calculate the sparsity
+data_s1_8900 <-gene_expr(single_cell)
+sparsity_cosr <- length(data_s1_8900$scores[which(data_s1_8900$scores==0)])/length(data_s1_8900$scores)
+sparsity_cosr
+
+data_s1_4443 <-gene_expr(pbmc_10x_real_data)
+sparsity_cosr <- length(data_s1_8900$scores[which(data_s1_8900$scores==0)])/length(data_s1_8900$scores)
+sparsity_cosr
+
+
+
+
