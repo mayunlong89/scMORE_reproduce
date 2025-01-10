@@ -10,8 +10,6 @@ library(BSgenome.Hsapiens.UCSC.hg38)
 #working location:
 setwd('/Users/mayunlong/Desktop/WMU2024/ctDRTF-codes and data/scHBO/2024-11-20-ctDRTF_re-analysis/')
 
-human_PD_brain_10x <- readRDS("/Users/mayunlong/Desktop/WMU2024/ctDRTF-codes and data/scHBO/2024-11-20-ctDRTF_re-analysis/06-PD/PD_anno.rds")
-
 
 ###Load 10X format matrix
 sample_list <- readr::read_csv('sample.csv')
@@ -178,17 +176,38 @@ DotPlot(obj,features = markers)+coord_flip()
 saveRDS(obj,'PD_anno.rds')
 
 
+###---PD brain merge single-cell------------------------------------------------------
+
+#load R packages
+
+library(scMORE)
+library(GenomicRanges)
+library(IRanges)
+library(Seurat)
+library(Signac)
+
+#read data
+human_PD_brain_10x <- readRDS("/Users/mayunlong/Desktop/WMU2024/ctDRTF-codes and data/scHBO/2024-11-20-ctDRTF_re-analysis/06-PD/PD_anno.rds")
+
+Idents(human_PD_brain_10x) <- human_PD_brain_10x$cell_type
+DimPlot(human_PD_brain_10x, reduction = "umap.cca")
+
+
+human_PD_brain_10x <- JoinLayers(human_PD_brain_10x)
+
+grn_outputs58949_glm_PD <- createRegulon(human_PD_brain_10x, n_targets=5,
+                                      peak2gene_method = 'Signac',
+                                      infer_method = 'glm')
+
+##----dotPlot for markers
+markers <- c('SLC17A7','SLC17A6','SLC32A1','TBR1','STMN2','MOBP','MOG','SOX2','OLIG1','OLIG2','SLC1A2','GFAP','AQP4','FLT1','VWF','PDGFRB','TREM2','GPR34','CD3E','CD8A')
+
+Idents(human_PD_brain_10x) <- human_PD_brain_10x@meta.data$cell_type
+DotPlot(human_PD_brain_10x,features = markers)+coord_flip()
 
 
 
-
-
-
-
-
-
-
-
+human_PD_brain_10x_pando <- load("/Users/mayunlong/Desktop/WMU2024/ctDRTF-codes and data/scHBO/2024-11-20-ctDRTF_re-analysis/06-PD/Pando_PD.RData")
 
 
 
