@@ -1,5 +1,5 @@
 
-###----------significant TFs---------regulon feature plot---------Figure 2C
+###----------significant TFs---------regulon feature plot---------Figure 2D aND Sup Figure S2C
 
 # Load necessary libraries
 library(Seurat)
@@ -19,8 +19,14 @@ library(Seurat)
 library(ggplot2)
 library(patchwork) # For combining plots
 
+#Default use 'Signac' method for analysis
+grn_outputs <- createRegulon(single_cell,
+                             n_targets = 5,
+                             peak2gene_method="Signac",
+                             infer_method = 'glm')
 
-regulons <- MORE_results_lymp1$scMore_grn$grn
+
+regulons <- grn_outputs$grn
 
 #1
 Module <- regulons[regulons$TF == "ZEB1", ]
@@ -240,4 +246,42 @@ FeaturePlot(
   theme_classic()  # 可选：更改图形主题
 
 
+
+
+
+#7
+Module <- regulons[regulons$TF == "LEF1", ]
+LEF1_regulon <- c(unique(Module$TF), unique(Module$Target))
+# Add module score for FOXO1 regulon
+single_cell <- AddModuleScore(
+  object = single_cell,
+  features = list(LEF1_regulon),  # Use only the genes present in the object
+  name = "LEF1_regulon"
+)
+
+library(RColorBrewer)
+FeaturePlot(object = single_cell, reduction = "umap.new", features = "LEF1_regulon1") +
+  scale_colour_gradientn(colours = rev(brewer.pal(n = 10, name = "RdBu")))
+
+# 使用 FeaturePlot 并自定义颜色梯度
+FeaturePlot(
+  object = single_cell,
+  reduction = "umap.new",
+  features = "LEF1_regulon1"
+) +
+  scale_colour_gradientn(
+    colours = c("gray", "white", "red")  # 自定义颜色梯度
+  ) +
+  theme_classic()  # 可选：更改图形主题
+
+# 使用 FeaturePlot 并自定义颜色梯度
+FeaturePlot(
+  object = single_cell,
+  reduction = "umap.new",
+  features = "LEF1"
+) +
+  scale_colour_gradientn(
+    colours = c("gray", "white", "red")  # 自定义颜色梯度
+  ) +
+  theme_classic()  # 可选：更改图形主题
 
