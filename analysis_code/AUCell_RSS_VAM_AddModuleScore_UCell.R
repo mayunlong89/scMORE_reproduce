@@ -1,3 +1,4 @@
+
 #2025-01-24
 #2025-01-12
 
@@ -124,6 +125,7 @@ head(results_auc)
 
 ####--------AUCell------2---RSS----calcRSS()
 library(AUCell)
+source("~/Desktop/WMU2024/ctDRTF-codes and data/scHBO/2024-11-20-ctDRTF_re-analysis/scMORE_test_codes/calcRSS.R")
 
 cells_rankings <- AUCell_buildRankings(single_cell@assays$RNA@data)
 
@@ -213,8 +215,6 @@ library(qusage)
 #install.packages('reticulate')
 library(sceasy)
 library(reticulate)
-
-
 
 ## Convert seurat format to sce format
 #sceasy::convertFormat(single_cell,from = "seurat",to="sce",outFile = "organoids_brain_multi_sce.rds")
@@ -317,4 +317,18 @@ head(results)
   results_ucell2$regluons <- Module_regulon[1]
   colnames(results_ucell2) <- c("celltypes","scores","regulons")
   head(results_ucell2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
