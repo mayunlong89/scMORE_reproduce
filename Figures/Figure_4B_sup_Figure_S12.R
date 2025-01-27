@@ -313,5 +313,12 @@ ggplot(summary_data, aes(x = Method, y = Mean_Score, fill = Method)) +
   )
 
 
+#统计regulon sizes
+data <- grn_outputs_8900$grn
 
+# Group by TF and count the number of Targets, adding 1
+result <- data %>%
+  group_by(TF) %>%
+  summarise(Target_Count = n() + 1)
 
+write.csv(result, file="regulon_size_single_cell8900.csv",quote=F, row.names = F)
