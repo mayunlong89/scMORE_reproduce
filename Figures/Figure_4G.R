@@ -1,6 +1,6 @@
 
 ##-----------Figure 4G------
-####-------------------ctDRTF monocyte subtypes inference analysis
+####-------------------scMORE monocyte subtypes inference analysis
 
 ##-----IBD
 gene_info_IBD <- read.table("IBD_processed_magma_results.genes.out",header = TRUE)
