@@ -44,13 +44,11 @@ ggplot(add_cell, aes(x = group, y = Module_regulon1, fill = sex)) +
 
 
 
-
-
 # 按细胞类型分组并执行 Wilcoxon 检验
 
 add_cell2 <- add_cell[-which(add_cell$group=="Aged"),]
 results <- add_cell2 %>%
-  group_by(cell_type) %>%
+  group_by(cell_type,sex) %>%
   summarise(
     p_value = wilcox.test(Module_regulon1 ~ group)$p.value,
     statistic = wilcox.test(Module_regulon1 ~ group)$statistic
@@ -61,7 +59,7 @@ print(results)
 
 add_cell2 <- add_cell[-which(add_cell$group=="Young"),]
 results <- add_cell2 %>%
-  group_by(cell_type) %>%
+  group_by(cell_type,sex) %>%
   summarise(
     p_value = wilcox.test(Module_regulon1 ~ group)$p.value,
     statistic = wilcox.test(Module_regulon1 ~ group)$statistic
@@ -73,7 +71,7 @@ print(results)
 
 add_cell2 <- add_cell[-which(add_cell$group=="PD"),]
 results <- add_cell2 %>%
-  group_by(cell_type) %>%
+  group_by(cell_type,sex) %>%
   summarise(
     p_value = wilcox.test(Module_regulon1 ~ group)$p.value,
     statistic = wilcox.test(Module_regulon1 ~ group)$statistic
