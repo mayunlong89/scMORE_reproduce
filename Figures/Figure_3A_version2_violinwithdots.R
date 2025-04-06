@@ -22,11 +22,14 @@ custom_colors <- c("average" = "#F5D9B0", "cosine" = "#9A4A32")
 # 创建 interaction 列用于分组显示
 glm_glmnet_xgb_data$group <- interaction(glm_glmnet_xgb_data$method, glm_glmnet_xgb_data$specificity_method)
 
+
+glm_glmnet_xgb_data$group <- factor(glm_glmnet_xgb_data$group,levels=c("A_glm.average","A_glm.cosine","B_xgb.average","B_xgb.cosine","C_glmnet.average","C_glmnet.cosine"))
+
 # 画图
 ggplot(glm_glmnet_xgb_data, aes(x = group, y = Escore, fill = specificity_method)) +
   geom_violin(trim = FALSE, color = "black") +
   geom_boxplot(width = 0.15, fill = "white", color = "black", outlier.shape = NA, alpha = 0.9) +
-  geom_jitter(size = 1.5, alpha = 0.6, color = "gray30", width = 0.1) +
+  geom_jitter(size = 1.5, alpha = 0.7, color = "gray30", width = 0.1) +
   scale_fill_manual(values = custom_colors) +
   labs(
     x = "",
