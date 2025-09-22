@@ -1,5 +1,5 @@
 
-##--------------Figure 6F-----Regulon size
+##--------------Figure 5e-----Regulon size
 # 加载必要的库
 library(ggplot2)
 library(dplyr)
