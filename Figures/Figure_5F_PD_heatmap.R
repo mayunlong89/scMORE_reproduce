@@ -1,12 +1,14 @@
 
-##---------------------heatmap-----Figure 6G---- Supplementary Figure S27A
+##---------------------heatmap-----Figure 5F---- Supplementary Figure S21A
 library(pheatmap)
 
 setwd("~/Desktop/WMU2024/ctDRTF-codes and data/scHBO/2024-11-20-ctDRTF_re-analysis/06-PD/")
 
-heatmap_8diseases <- read.csv("01_8disease_heatmap.csv",header = TRUE)
-
+# top 5 for Figure 5F
 heatmap_8diseases <- read.csv("01_8disease_heatmap_top5.csv",header = TRUE)
+
+#--all for Supplementary_Figure S21
+heatmap_8diseases <- read.csv("01_8disease_heatmap.csv",header = TRUE)
 
 head(heatmap_8diseases)
 
