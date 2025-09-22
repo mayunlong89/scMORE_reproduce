@@ -1,5 +1,5 @@
 
-#####---------------Figure 5B
+#####---------------Figure S10C
 
 setwd("~/Desktop/WMU2024/ctDRTF-codes and data/scHBO/2024-11-20-ctDRTF_re-analysis/10-8psychiatric_disorders/")
 
