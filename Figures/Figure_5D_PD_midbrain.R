@@ -1,5 +1,5 @@
 
-##----Figure 6D-----Sup_Figure S24 and S25
+##----Figure 5D-----(These codes also contain old Sup_Figure S24 and S25, which have been deprecated)
 
 cell_counts <- table(PD_seu$cell_type)
 
