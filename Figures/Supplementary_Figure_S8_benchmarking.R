@@ -60,7 +60,7 @@ ggplot(data, aes(x = Cellcount, y = Score, fill = Method)) +
 
 
 
-##---------meam 10 blood cell trait bar----Supplementary_Figure_S9
+##---------meam 10 blood cell trait bar----Supplementary_Figure_S8
 
 # Calculate Mean and Standard Error for Each Method and Cellcount
 summary_data <- data %>%
