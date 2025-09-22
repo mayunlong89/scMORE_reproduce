@@ -1,6 +1,9 @@
 #---Signac method
 #theta--visualization
 
+library(ggplot2)
+library(dplyr)
+
 setwd("/Users/mayunlong/Desktop/WMU2024/ctDRTF-codes and data/scHBO/2024-11-20-ctDRTF_re-analysis/02-10-blood_traits/scMORE_benchmark_10blood_trait_magma_vcf/")
 
 
@@ -8,13 +11,36 @@ glm_glmnet_xgb_data <- read.table("05_glm_glmnet_xgb_performance.txt",header = T
 
 head(glm_glmnet_xgb_data)
 
-# Generate the violin plot
-ggplot(glm_glmnet_xgb_data, aes(x = method, y = Escore, fill = specificity_method)) +
-  geom_violin(trim = FALSE, position = position_dodge(0.8)) + # Adjust position for side-by-side violins
-  scale_fill_manual(values = c("blue", "orange")) + # Match colors
-  labs(x = "", y = "E score", fill = "method") +
+
+
+library(ggplot2)
+library(dplyr)
+
+# 自定义颜色
+custom_colors <- c("average" = "#F5D9B0", "cosine" = "#9A4A32")
+
+# 创建 interaction 列用于分组显示
+glm_glmnet_xgb_data$group <- interaction(glm_glmnet_xgb_data$method, glm_glmnet_xgb_data$specificity_method)
+
+
+glm_glmnet_xgb_data$group <- factor(glm_glmnet_xgb_data$group,levels=c("A_glm.average","A_glm.cosine","B_xgb.average","B_xgb.cosine","C_glmnet.average","C_glmnet.cosine"))
+
+# 画图
+ggplot(glm_glmnet_xgb_data, aes(x = group, y = Escore, fill = specificity_method)) +
+  geom_violin(trim = FALSE, color = "black") +
+  geom_boxplot(width = 0.15, fill = "white", color = "black", outlier.shape = NA, alpha = 0.9) +
+  geom_jitter(size = 1.5, alpha = 0.7, color = "gray30", width = 0.1) +
+  scale_fill_manual(values = custom_colors) +
+  labs(
+    x = "",
+    y = "E statistics",
+    fill = "Method"
+  ) +
   theme_minimal() +
-  theme(legend.position = "right") # Place legend on the right
+  theme(
+    axis.text.x = element_text(size = 11, angle = 45, hjust = 1),
+    text = element_text(size = 12)
+  )
 
 
 # Perform Wilcoxon test and calculate OR for each group
@@ -30,3 +56,5 @@ results <- glm_glmnet_xgb_data %>%
 
 # Print the results
 print(results)
+
+
