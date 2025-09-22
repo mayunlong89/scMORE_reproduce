@@ -1,6 +1,6 @@
 
 
-#####---------------Figure 6E---Sup_Figure_S26
+#####---------------Figure 5E---(old Sup_Figure_S26 codes were deprecated)
 
 setwd("~/Desktop/WMU2024/ctDRTF-codes and data/scHBO/2024-11-20-ctDRTF_re-analysis/06-PD/")
 
