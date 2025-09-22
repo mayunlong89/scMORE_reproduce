@@ -189,9 +189,6 @@ write.csv(results_UC_mono$scMore_trait_results, file="results_UC_mono_scMore_tra
 
 ##----Heatmap for subset of monocytes analysis
 
-setwd("/Users/mayunlong/Desktop/WMU2024/ctDRTF-codes and data/scHBO/GWAS-data/MAGMA_result_fuma/five_autoimmune_disease/")
-
-
 #@ Subset monocyte specific regulons-----heatmap---Figure 4G
 mono_data <- read.table("02_mono_subset_regulons_fivediseases.txt",header = TRUE)
 
