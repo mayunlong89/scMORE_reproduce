@@ -1,7 +1,7 @@
 
 
 
-##---------------------heatmap---for Eight psychiatric diseases---Figure 5D
+##---------------------heatmap---for Eight psychiatric diseases---Figure 7c
 library(pheatmap)
 
 setwd("~/Desktop/WMU2024/ctDRTF-codes and data/scHBO/2024-11-20-ctDRTF_re-analysis/10-8psychiatric_disorders//")
