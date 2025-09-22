@@ -20,7 +20,7 @@ data$Cellcount <- factor(data$Cellcount, levels = c("1K", "3K", "5K", "7K", "9K"
 
 
 
-##---------meam 10 blood cell trait
+##---------meam 10 blood cell trait------Figure 3D
 
 # Calculate Mean and Standard Error for Each Method and Cellcount
 summary_data <- data %>%
@@ -60,81 +60,7 @@ ggplot(data, aes(x = Cellcount, y = Score, fill = Method)) +
 
 
 
-
-
-
-
-
-
-# Violin plot + jitter 展示每组的分布
-ggplot(data, aes(x = Cellcount, y = Score, fill = Method)) +
-  geom_violin(trim = FALSE, width = 1.0, alpha = 0.7, color = "black", position = position_dodge(width = 0.9)) +
-  #geom_boxplot(width = 0.1, fill = "white", outlier.shape = NA, position = position_dodge(width = 0.5)) +
-  geom_jitter(position = position_jitterdodge(jitter.width = 0.1, dodge.width = 0.9),
-              size = 1.5, alpha = 0.8, color = "gray30") +
-  scale_fill_manual(values = c("#E9E4A6", "#E9B78A", "#F07B52")) +
-  labs(
-    title = "Scores Across 10 Traits by Method and Cell Count",
-    x = "Cell Count",
-    y = "E-statistics",
-    fill = "Method"
-  ) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    text = element_text(size = 12)
-  )
-
-
-
-
-
-
-
-
-
-###----------------Previous bar plots
-
-# Create Bar Plot with Error Bars
-ggplot(summary_data, aes(x = Cellcount, y = Mean_Score, fill = Method)) +
-  geom_bar(stat = "identity", position = position_dodge(), width = 0.7) +
-  geom_errorbar(aes(ymin = Mean_Score - SE_Score, ymax = Mean_Score + SE_Score),
-                position = position_dodge(0.7), width = 0.2) +
-  scale_fill_manual(values = c("#E9E4A6","#E9B78A","#F07B52")) +  # Custom colors
-  labs(
-    title = "Average Scores Across 10 Traits by Method and Cell Count",
-    x = "Cell Count",
-    y = "Mean Score ± SE",
-    fill = "Method"
-  ) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    text = element_text(size = 12)
-  )
-
-
-
-# Create the Bar Plot
-ggplot(data, aes(x = Cellcount, y = Score, fill = Method)) +
-  geom_bar(stat = "identity", position = position_dodge(), width = 0.7) +
-  facet_wrap(~ Trait, scales = "free_y") +  # Separate plots for each trait
-  scale_fill_manual(values = c("#E9E4A6","#E9B78A","#F07B52")) +  # Custom colors
-  labs(
-    title = "Method Comparison Across Cell Counts and Traits",
-    x = "Cell Count",
-    y = "Score",
-    fill = "Method"
-  ) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    strip.text = element_text(size = 10, face = "bold")
-  )
-
-
-
-##---------meam 10 blood cell trait bar
+##---------meam 10 blood cell trait bar----Supplementary_Figure_S9
 
 # Calculate Mean and Standard Error for Each Method and Cellcount
 summary_data <- data %>%
