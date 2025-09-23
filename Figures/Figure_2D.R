@@ -1,5 +1,5 @@
 
-###----------significant TFs---------regulon feature plot---------Figure 2D aND Sup Figure S2C
+###----------significant TFs---------regulon feature plot---------Figure 2D and Sup Figure S2C
 
 # Load necessary libraries
 library(Seurat)
