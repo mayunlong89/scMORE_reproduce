@@ -1,4 +1,4 @@
-### GWAS Summary Statistics Processing for MAGMA
+### GWAS Summary Statistics Processing for MAGMA (need raw P values from GWAS)
 
 ```bash
 # Step 1: Perform quality control on all SNPs based on MAF and sex chromosomes
